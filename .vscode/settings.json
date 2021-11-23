@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.md": "markdown",
+        "string": "cpp",
+        "initializer_list": "cpp"
+    }
+}
