@@ -14,8 +14,8 @@ private:
     const uint16_t byteWidth = 2;
 
     uint16_t *pixels;
-    const uint16_t background;
     const char *filename;
+    const uint16_t background;
 
     void write()
     {
