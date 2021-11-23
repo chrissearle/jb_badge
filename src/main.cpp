@@ -18,66 +18,52 @@
 
 Adafruit_GC9A01A *tft;
 
-Screen *avatar;
-Screen *jz2021;
-Screen *dukeMarius;
-Screen *dukeTetris;
-Screen *dukeTetris2;
-Screen *dukeViking;
-Screen *dukeViking2;
-Screen *dukeRock;
+const uint8_t screenCount = 8;
+
+Screen *screens[screenCount];
 
 void setup()
 {
-  Serial.begin(11520);
-
-  delay(5000);
-  Serial.println(F("GC9A01A Test!"));
-
   pinMode(TFT_BL, OUTPUT);
   digitalWrite(TFT_BL, HIGH);
-
-  Serial.println("Starting TFT");
 
   tft = new Adafruit_GC9A01A(TFT_CS, TFT_DC, TFT_RST);
 
   tft->begin();
 
-  Serial.println(F("Starting SD"));
-
   if (!SD.begin(BUILTIN_SDCARD))
   {
-    Serial.println(F("SD init failed"));
-
     while (true)
       ;
   }
 
-  
-
-  Serial.println(F("Setup Done!"));
-
   // For some reason this both sets correct rotation and fixes colour order from BGR to RGB
   tft->setRotation(0);
 
-  avatar = new Avatar(tft);
-  jz2021 = new ImageScreen(tft, "jz2021.dat", GC9A01A_BLACK);
-  dukeMarius = new ImageScreen(tft, "marius_duke.dat", GC9A01A_WHITE);
-  dukeRock = new ImageScreen(tft, "rock_duke.dat", GC9A01A_WHITE);
-  dukeTetris = new ImageScreen(tft, "tetris_duke2.dat", GC9A01A_WHITE);
-  dukeTetris2 = new ImageScreen(tft, "tetris_duke2.dat", GC9A01A_WHITE);
-  dukeViking = new ImageScreen(tft, "viking_duke.dat", GC9A01A_WHITE);
-  dukeViking2 = new ImageScreen(tft, "viking_duke2.dat", GC9A01A_WHITE);
+  screens[0] = new Avatar(tft);
+  screens[1] = new ImageScreen(tft, "jz2021.dat", GC9A01A_BLACK);
+  screens[2] = new ImageScreen(tft, "marius_duke.dat", GC9A01A_WHITE);
+  screens[3] = new ImageScreen(tft, "rock_duke.dat", GC9A01A_WHITE);
+  screens[4] = new ImageScreen(tft, "tetris_duke2.dat", GC9A01A_WHITE);
+  screens[5] = new ImageScreen(tft, "tetris_duke2.dat", GC9A01A_WHITE);
+  screens[6] = new ImageScreen(tft, "viking_duke.dat", GC9A01A_WHITE);
+  screens[7] = new ImageScreen(tft, "viking_duke2.dat", GC9A01A_WHITE);
+}
+
+uint32_t nextScreen() {
+  static uint32_t lastScreen = 0;
+  uint32_t nextScreen = lastScreen;
+  
+  do {
+    nextScreen = random(screenCount);
+  } while (nextScreen == lastScreen);
+
+  lastScreen = nextScreen;
+
+  return nextScreen;
 }
 
 void loop(void)
 {
-  avatar->draw();
-  jz2021->draw();
-  dukeMarius->draw();
-  dukeRock->draw();
-  dukeTetris->draw();
-  dukeTetris2->draw();
-  dukeViking->draw();
-  dukeViking2->draw();
+  screens[nextScreen()]->draw();
 }
