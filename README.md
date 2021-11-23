@@ -15,7 +15,9 @@ These can then be read from the SD card to a `uint16_t *` and passed to `drawRGB
 
 ## Image Conversion
 
-* All images **MUST** be 170 pixels square PNG
+* All images **MUST** be max of 240 pixels per side
+* Default size is 170 pixel square
+* Format - PNG
 * Transparent pixels will be dropped (black pixel) - alpha is ignored.
 
 ### Build converter

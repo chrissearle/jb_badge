@@ -10,12 +10,14 @@
 class ImageScreen : public Screen
 {
 private:
-    const uint16_t imageSide = 170;
+    const uint16_t maxDim = 240;
     const uint16_t byteWidth = 2;
 
     uint16_t *pixels;
     const char *filename;
     const uint16_t background;
+    const uint16_t imageWidth;
+    const uint16_t imageHeight;
 
     void write()
     {
@@ -25,22 +27,40 @@ private:
         }
 
         File file = SD.open(filename, FILE_WRITE);
-        file.write(pixels, imageSide * imageSide * byteWidth);
+        file.write(pixels, imageWidth * imageHeight * byteWidth);
         file.close();
     }
 
     void read()
     {
-        pixels = (uint16_t *)malloc(imageSide * imageSide * byteWidth);
+        pixels = (uint16_t *)malloc(imageWidth * imageHeight * byteWidth);
         File file = SD.open(filename, FILE_READ);
-        file.read(pixels, imageSide * imageSide * byteWidth);
+        file.read(pixels, imageWidth * imageHeight * byteWidth);
         file.close();
     }
 
 public:
-    ImageScreen(Adafruit_SPITFT *tft, const char *filename, uint16_t background) : Screen(tft), filename(filename), background(background)
+    ImageScreen(Adafruit_SPITFT *tft, const char *filename, uint16_t background,
+                uint16_t imageWidth, uint16_t imageHeight) : Screen(tft),
+                                                             filename(filename),
+                                                             background(background),
+                                                             imageWidth(imageWidth),
+                                                             imageHeight(imageHeight)
     {
         read();
+    }
+
+    ImageScreen(Adafruit_SPITFT *tft, const char *filename, uint16_t background) : Screen(tft),
+                                                                                   filename(filename),
+                                                                                   background(background),
+                                                                                   imageWidth(170),
+                                                                                   imageHeight(170)
+    {
+        read();
+    }
+
+    ~ImageScreen() {
+        free(pixels);
     }
 
     void draw()
@@ -49,7 +69,7 @@ public:
 
         yield();
 
-        tft->drawRGBBitmap(35, 35, pixels, 170, 170);
+        tft->drawRGBBitmap((maxDim - imageWidth) / 2, (maxDim - imageHeight) / 2, pixels, imageWidth, imageHeight);
 
         yield();
 

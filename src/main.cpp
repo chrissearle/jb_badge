@@ -20,7 +20,7 @@ Adafruit_GC9A01A *tft;
 
 const uint8_t screenCount = 8;
 
-Screen *screens[screenCount];
+Screen *currentScreen;
 
 void setup()
 {
@@ -40,30 +40,68 @@ void setup()
   // For some reason this both sets correct rotation and fixes colour order from BGR to RGB
   tft->setRotation(0);
 
-  screens[0] = new Avatar(tft);
-  screens[1] = new ImageScreen(tft, "jz2021.dat", GC9A01A_BLACK);
-  screens[2] = new ImageScreen(tft, "marius_duke.dat", GC9A01A_WHITE);
-  screens[3] = new ImageScreen(tft, "rock_duke.dat", GC9A01A_WHITE);
-  screens[4] = new ImageScreen(tft, "tetris_duke2.dat", GC9A01A_WHITE);
-  screens[5] = new ImageScreen(tft, "tetris_duke2.dat", GC9A01A_WHITE);
-  screens[6] = new ImageScreen(tft, "viking_duke.dat", GC9A01A_WHITE);
-  screens[7] = new ImageScreen(tft, "viking_duke2.dat", GC9A01A_WHITE);
+  tft->fillScreen(GC9A01A_YELLOW);
+
+  delay(1000);
+
+  tft->fillScreen(GC9A01A_BLACK);
+
+  delay(1000);
+
+  currentScreen = new Avatar(tft);
 }
 
-uint32_t nextScreen() {
+void nextScreen()
+{
   static uint32_t lastScreen = 0;
   uint32_t nextScreen = lastScreen;
-  
-  do {
+
+  do
+  {
     nextScreen = random(screenCount);
   } while (nextScreen == lastScreen);
 
   lastScreen = nextScreen;
 
-  return nextScreen;
+  if (currentScreen != nullptr)
+  {
+    delete currentScreen;
+  }
+
+  switch (nextScreen)
+  {
+  case 0:
+    currentScreen = new Avatar(tft);
+    break;
+  case 1:
+    currentScreen = new ImageScreen(tft, "jz2021.dat", GC9A01A_BLACK);
+    break;
+  case 2:
+    currentScreen = new ImageScreen(tft, "marius_duke.dat", GC9A01A_WHITE, 240, 234);
+    break;
+  case 3:
+    currentScreen = new ImageScreen(tft, "rock_duke.dat", GC9A01A_WHITE, 240, 158);
+    break;
+  case 4:
+    currentScreen = new ImageScreen(tft, "tetris_duke.dat", GC9A01A_WHITE, 240, 240);
+    break;
+  case 5:
+    currentScreen = new ImageScreen(tft, "tetris_duke2.dat", GC9A01A_WHITE, 240, 240);
+    break;
+  case 6:
+    currentScreen = new ImageScreen(tft, "viking_duke.dat", GC9A01A_WHITE, 240, 240);
+    break;
+  case 7:
+    currentScreen = new ImageScreen(tft, "viking_duke2.dat", GC9A01A_WHITE, 240, 240);
+    break;
+  default:
+    currentScreen = new Avatar(tft);
+    break;
+  }
 }
 
 void loop(void)
 {
-  screens[nextScreen()]->draw();
+  currentScreen->draw();
+  nextScreen();
 }
