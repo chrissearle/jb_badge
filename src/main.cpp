@@ -9,13 +9,7 @@
 
 #include "Screen.h"
 #include "Avatar.h"
-#include "JZ2021Screen.h"
-#include "DukeVikingScreen.h"
-#include "DukeViking2Screen.h"
-#include "DukeRockScreen.h"
-#include "DukeTetrisScreen.h"
-#include "DukeTetris2Screen.h"
-#include "DukeMariusScreen.h"
+#include "ImageScreen.h"
 
 #define TFT_DC 9
 #define TFT_CS 10
@@ -36,6 +30,8 @@ Screen *dukeRock;
 void setup()
 {
   Serial.begin(11520);
+
+  delay(5000);
   Serial.println(F("GC9A01A Test!"));
 
   pinMode(TFT_BL, OUTPUT);
@@ -57,19 +53,21 @@ void setup()
       ;
   }
 
+  
+
   Serial.println(F("Setup Done!"));
 
   // For some reason this both sets correct rotation and fixes colour order from BGR to RGB
   tft->setRotation(0);
 
   avatar = new Avatar(tft);
-  jz2021 = new JZ2021Screen(tft);
-  dukeMarius = new DukeMariusScreen(tft);
-  dukeRock = new DukeRockScreen(tft);
-  dukeTetris = new DukeTetrisScreen(tft);
-  dukeTetris2 = new DukeTetris2Screen(tft);
-  dukeViking = new DukeVikingScreen(tft);
-  dukeViking2 = new DukeViking2Screen(tft);
+  jz2021 = new ImageScreen(tft, "jz2021.dat", GC9A01A_BLACK);
+  dukeMarius = new ImageScreen(tft, "marius_duke.dat", GC9A01A_WHITE);
+  dukeRock = new ImageScreen(tft, "rock_duke.dat", GC9A01A_WHITE);
+  dukeTetris = new ImageScreen(tft, "tetris_duke2.dat", GC9A01A_WHITE);
+  dukeTetris2 = new ImageScreen(tft, "tetris_duke2.dat", GC9A01A_WHITE);
+  dukeViking = new ImageScreen(tft, "viking_duke.dat", GC9A01A_WHITE);
+  dukeViking2 = new ImageScreen(tft, "viking_duke2.dat", GC9A01A_WHITE);
 }
 
 void loop(void)
