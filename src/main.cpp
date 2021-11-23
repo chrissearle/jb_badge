@@ -18,7 +18,7 @@
 
 Adafruit_GC9A01A *tft;
 
-const uint8_t screenCount = 8;
+const uint8_t screenCount = 9;
 
 Screen *currentScreen;
 
@@ -40,13 +40,7 @@ void setup()
   // For some reason this both sets correct rotation and fixes colour order from BGR to RGB
   tft->setRotation(0);
 
-  tft->fillScreen(GC9A01A_YELLOW);
-
-  delay(1000);
-
   tft->fillScreen(GC9A01A_BLACK);
-
-  delay(1000);
 
   currentScreen = new Avatar(tft);
 }
@@ -93,6 +87,9 @@ void nextScreen()
     break;
   case 7:
     currentScreen = new ImageScreen(tft, "viking_duke2.dat", GC9A01A_WHITE, 240, 240);
+    break;
+  case 8:
+    currentScreen = new ImageScreen(tft, "itera.dat", GC9A01A_WHITE, 240, 240);
     break;
   default:
     currentScreen = new Avatar(tft);
