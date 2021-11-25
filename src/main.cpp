@@ -18,7 +18,7 @@
 
 Adafruit_GC9A01A *tft;
 
-const uint8_t screenCount = 9;
+const uint8_t screenCount = 11;
 
 Screen *currentScreen;
 
@@ -89,6 +89,12 @@ void nextScreen()
     currentScreen = new ImageScreen(tft, "viking_duke2.dat", GC9A01A_WHITE, 240, 240);
     break;
   case 8:
+    currentScreen = new ImageScreen(tft, "nisse_duke.dat", GC9A01A_WHITE, 240, 240);
+    break;
+  case 9:
+    currentScreen = new ImageScreen(tft, "nisse_duke2.dat", GC9A01A_WHITE, 240, 240);
+    break;
+  case 10:
     currentScreen = new ImageScreen(tft, "itera.dat", GC9A01A_WHITE, 240, 240);
     break;
   default:
