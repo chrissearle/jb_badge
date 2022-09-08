@@ -13,10 +13,25 @@ GC9A01A round display - I used this part from waveshare: https://www.waveshare.c
 
 ## Teensy
 
+PlatformIO Project - see `platformio.ini` and `src` folder.
+
 The Teensy 4 version of the SD library is not compatible with the Adafruit_GFX image loader classes
 so loading from bitmap on the SD card does not work out of the box.
 
 Adafruit_GFX is expecting image data as rgb565 (16 bit number - 5 bits red, 6 bits green 5 bits blue).
+
+## Connections
+
+- Screen -> Teensy
+
+- VCC -> 3.3V
+- GND -> GND
+- DIN -> 11 (MOSI)
+- CLK -> 13 (SCK)
+- CS -> 10 (CS)
+- DC -> 9
+- RST -> 8
+- BL -> 7
 
 ## Image conversion/preparation
 
