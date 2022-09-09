@@ -1,6 +1,6 @@
 # javaBin badge
 
-Uses a GC9A01A display and a Teensy 4.1 microcontrolle (since the 4.1 has a micro-SD card slot).
+Uses a GC9A01A display and a Teensy 4.1 microcontroller (since the 4.1 has a micro-SD card slot).
 
 Displays different images on screen.
 
