@@ -17,9 +17,11 @@ fun main(args: Array<String>) {
                     val pixel = image.getRGB(x, y)
 
                     outputStream.writeShort(
-                        ((pixel and 0xf80000 shr 8) or
+                        (
+                            (pixel and 0xf80000 shr 8) or
                                 (pixel and 0xfc00 shr 5) or
-                                (pixel and 0xf8 shr 3))
+                                (pixel and 0xf8 shr 3)
+                            ),
                     )
                 }
             }
