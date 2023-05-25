@@ -50,7 +50,7 @@ These can then be read from the SD card to a `uint16_t *` and passed to `drawRGB
 
 ```shell
 cd converter
-mvn clean install
+./gradlew clean build
 ```
 
 ### Convert images
@@ -58,6 +58,6 @@ mvn clean install
 ```shell
 cd images
 for F in *png; do
-    java -jar ../converter/target/converter-1.0-SNAPSHOT.jar $F ${F%%.png}.dat
+    java -jar ../converter/build/libs/converter.jar $F ${F%%.png}.dat
 done
 ```

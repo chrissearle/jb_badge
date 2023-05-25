@@ -1,0 +1,13 @@
+[versions]
+kotlin_version = "1.8.21"
+guava_version = "31.0.1-jre"
+kotlinter_version = "3.14.0"
+shadow_version = "8.1.1"
+
+[plugins]
+kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin_version" }
+kotlinter = { id = "org.jmailen.kotlinter", version.ref = "kotlinter_version" }
+shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow_version" }
+
+[libraries]
+guava = { group = "com.google.guava", name = "guava", version.ref = "guava_version" }

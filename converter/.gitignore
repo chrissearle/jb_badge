@@ -1,3 +1,4 @@
 target
+build
 .idea
-dependency-reduced-pom.xml
+.gradle
