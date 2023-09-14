@@ -39,6 +39,8 @@ The java project in the `converter` directory will read a PNG and spit out a dat
 
 These can then be read from the SD card to a `uint16_t *` and passed to `drawRGBBitmap`.
 
+Note that when converting it must write the bytes in little-endian.
+
 ### Image Conversion
 
 - All images **MUST** be max of 240 pixels per side
