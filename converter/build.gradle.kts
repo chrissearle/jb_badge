@@ -13,7 +13,7 @@ application {
     mainClass.set("net.chrissearle.converter.ConvertKt")
 }
 
-java.sourceCompatibility = JavaVersion.VERSION_19
+java.sourceCompatibility = JavaVersion.VERSION_20
 
 repositories {
     mavenCentral()
@@ -26,7 +26,7 @@ dependencies {
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "19"
+        jvmTarget = "20"
     }
 }
 
