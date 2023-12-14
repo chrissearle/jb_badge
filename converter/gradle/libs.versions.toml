@@ -1,5 +1,5 @@
 [versions]
-kotlin_version = "1.9.10"
+kotlin_version = "1.9.21"
 guava_version = "31.0.1-jre"
 kotlinter_version = "3.14.0"
 shadow_version = "8.1.1"
