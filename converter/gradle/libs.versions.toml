@@ -1,13 +1,17 @@
 [versions]
-kotlin_version = "1.9.21"
-guava_version = "31.0.1-jre"
-kotlinter_version = "3.14.0"
+detekt_version = "1.23.5"
+kotlin_version = "1.9.23"
+guava_version = "33.0.0-jre"
+kotlinter_version = "4.2.0"
 shadow_version = "8.1.1"
+gradle_versions_filter_version = "0.1.16"
 
 [plugins]
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin_version" }
 kotlinter = { id = "org.jmailen.kotlinter", version.ref = "kotlinter_version" }
 shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow_version" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt_version" }
+versions = { id = "se.ascp.gradle.gradle-versions-filter", version.ref = "gradle_versions_filter_version" }
 
 [libraries]
 guava = { group = "com.google.guava", name = "guava", version.ref = "guava_version" }

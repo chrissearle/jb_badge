@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.kotlin)
     alias(libs.plugins.kotlinter)
     alias(libs.plugins.shadow)
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.versions)
     application
 }
 
@@ -14,7 +16,7 @@ application {
 }
 
 kotlin {
-    jvmToolchain(20)
+    jvmToolchain(21)
 }
 
 repositories {
