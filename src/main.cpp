@@ -18,7 +18,7 @@
 
 Adafruit_GC9A01A *tft;
 
-const uint8_t screenCount = 18;
+const uint8_t screenCount = 19;
 
 Screen *currentScreen;
 
@@ -117,6 +117,9 @@ void nextScreen()
     break;
   case 17:
     currentScreen = new ImageScreen(tft, "bart_duke.dat", GC9A01A_WHITE, 240, 240);
+    break;
+  case 18:
+    currentScreen = new ImageScreen(tft, "2024_circle.dat", GC9A01A_WHITE, 200, 200);
     break;
   default:
     currentScreen = new Avatar(tft);
