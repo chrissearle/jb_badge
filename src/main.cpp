@@ -18,7 +18,7 @@
 
 Adafruit_GC9A01A *tft;
 
-const uint8_t screenCount = 19;
+const uint8_t screenCount = 23;
 
 Screen *currentScreen;
 
@@ -120,6 +120,18 @@ void nextScreen()
     break;
   case 18:
     currentScreen = new ImageScreen(tft, "2024_circle.dat", GC9A01A_WHITE, 200, 200);
+    break;
+  case 19:
+    currentScreen = new ImageScreen(tft, "jz24-disc.dat", GC9A01A_WHITE, 240, 240);
+    break;
+  case 20:
+    currentScreen = new ImageScreen(tft, "jz24-usb-duke.dat", GC9A01A_WHITE, 240, 240);
+    break;
+  case 21:
+    currentScreen = new ImageScreen(tft, "jz24-mc.dat", GC9A01A_WHITE, 240, 240);
+    break;
+  case 22:
+    currentScreen = new ImageScreen(tft, "jz24-sky.dat", GC9A01A_WHITE, 240, 240);
     break;
   default:
     currentScreen = new Avatar(tft);
