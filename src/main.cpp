@@ -17,6 +17,14 @@
 #define TFT_RST 8
 #define TFT_BL 7
 
+#define VOLT_PIN 18
+
+const float adc_scaling = 3.3 / 1024.0;
+const float adc_threshold = 3.0;
+
+// Potential divider - reduce voltage in half - two 10k resistors
+const int potential_divider_resistance = 10000;
+
 Adafruit_GC9A01A *tft;
 
 const uint8_t screenCount = 23;
@@ -27,6 +35,8 @@ bool lowBattery = false;
 
 void setup()
 {
+  pinMode(VOLT_PIN, INPUT);
+
   pinMode(TFT_BL, OUTPUT);
   digitalWrite(TFT_BL, HIGH);
 
@@ -46,6 +56,35 @@ void setup()
   tft->fillScreen(GC9A01A_BLACK);
 
   currentScreen = new Avatar(tft);
+}
+
+float readADC()
+{
+  int adc_value;
+
+  float adc_voltage;
+  float measured_voltage;
+
+  adc_value = analogRead(VOLT_PIN);
+  adc_voltage = adc_value * adc_scaling;
+
+  measured_voltage = (adc_voltage * (potential_divider_resistance * 2)) / potential_divider_resistance;
+
+  return measured_voltage;
+}
+
+void checkVoltage()
+{
+  float voltage = readADC();
+
+  if (voltage < adc_threshold)
+  {
+    lowBattery = true;
+  }
+  else
+  {
+    lowBattery = false;
+  }
 }
 
 void nextScreen()
@@ -150,6 +189,7 @@ void nextScreen()
 
 void loop(void)
 {
+  checkVoltage();
   currentScreen->draw();
   nextScreen();
 }

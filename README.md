@@ -33,6 +33,11 @@ Adafruit_GFX is expecting image data as rgb565 (16 bit number - 5 bits red, 6 bi
 - RST -> 8
 - BL -> 7
 
+- Voltage monitor
+
+- pin 18
+- Voltage divide VCC in half - two 10k resistors or similar
+
 ## Image conversion/preparation
 
 The java project in the `converter` directory will read a PNG and spit out a dat file of data in that format - a list of bytes that are really 16 bits in little endian order.
