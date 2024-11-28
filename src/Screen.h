@@ -14,7 +14,7 @@ protected:
     Adafruit_SPITFT *tft;
 
 public:
-    Screen(Adafruit_SPITFT *tft) : tft(tft){};
-    virtual ~Screen(){};
+    Screen(Adafruit_SPITFT *tft) : tft(tft) {};
+    virtual ~Screen() {};
     virtual void draw() = 0;
 };

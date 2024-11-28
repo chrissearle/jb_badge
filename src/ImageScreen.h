@@ -59,7 +59,8 @@ public:
         read();
     }
 
-    ~ImageScreen() {
+    ~ImageScreen()
+    {
         free(pixels);
     }
 
