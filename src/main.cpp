@@ -9,6 +9,7 @@
 
 #include "Screen.h"
 #include "Avatar.h"
+#include "LowBattery.h"
 #include "ImageScreen.h"
 
 #define TFT_DC 9
@@ -21,6 +22,8 @@ Adafruit_GC9A01A *tft;
 const uint8_t screenCount = 23;
 
 Screen *currentScreen;
+
+bool lowBattery = false;
 
 void setup()
 {
@@ -47,6 +50,12 @@ void setup()
 
 void nextScreen()
 {
+  if (lowBattery)
+  {
+    currentScreen = new LowBattery(tft);
+    return;
+  }
+
   static uint32_t lastScreen = 0;
   uint32_t nextScreen = lastScreen;
 
