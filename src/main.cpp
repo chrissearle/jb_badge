@@ -181,6 +181,30 @@ void nextScreen()
   case 22:
     currentScreen = new ImageScreen(tft, "jz24-sky.dat", GC9A01A_WHITE, 240, 240);
     break;
+  case 23:
+    currentScreen = new ImageScreen(tft, "reg_vestfold.dat", GC9A01A_DARKGREY, 200, 200);
+    break;
+  case 24:
+    currentScreen = new ImageScreen(tft, "reg_bergen.dat", GC9A01A_DARKGREY, 200, 200);
+    break;
+  case 25:
+    currentScreen = new ImageScreen(tft, "reg_oslo.dat", GC9A01A_DARKGREY, 200, 200);
+    break;
+  case 26:
+    currentScreen = new ImageScreen(tft, "reg_soerlandet.dat", GC9A01A_DARKGREY, 200, 200);
+    break;
+  case 27:
+    currentScreen = new ImageScreen(tft, "reg_sogn.dat", GC9A01A_DARKGREY, 200, 200);
+    break;
+  case 28:
+    currentScreen = new ImageScreen(tft, "reg_stavanger.dat", GC9A01A_DARKGREY, 200, 200);
+    break;
+  case 29:
+    currentScreen = new ImageScreen(tft, "reg_tromsoe.dat", GC9A01A_DARKGREY, 200, 200);
+    break;
+  case 30:
+    currentScreen = new ImageScreen(tft, "reg_trondheim.dat", GC9A01A_DARKGREY, 200, 200);
+    break;
   default:
     currentScreen = new Avatar(tft);
     break;
