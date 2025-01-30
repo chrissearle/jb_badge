@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.shadow)
     alias(libs.plugins.detekt)
     alias(libs.plugins.versions)
+    alias(libs.plugins.dependency.analysis)
     application
 }
 
@@ -16,7 +17,11 @@ application {
 }
 
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(22)
+
+    compilerOptions {
+        freeCompilerArgs = listOf("-Xconsistent-data-class-copy-visibility")
+    }
 }
 
 repositories {
@@ -25,12 +30,6 @@ repositories {
 
 dependencies {
     implementation(libs.guava)
-}
-
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict")
-    }
 }
 
 tasks.shadowJar {
