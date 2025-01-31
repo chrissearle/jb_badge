@@ -64,7 +64,7 @@ public:
         free(pixels);
     }
 
-    void draw()
+    uint32_t draw()
     {
         tft->fillScreen(background);
 
@@ -74,6 +74,6 @@ public:
 
         yield();
 
-        delay(2000);
+        return 2000;
     }
 };

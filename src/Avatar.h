@@ -10,7 +10,7 @@ class Avatar : public Screen
 {
 public:
     Avatar(Adafruit_SPITFT *tft) : Screen(tft) {}
-    void draw()
+    uint32_t draw()
     {
         int16_t eyeballY = 70;
         int16_t pupilY = 83;
@@ -48,6 +48,7 @@ public:
         tft->fillCircle(center + eyeballO, eyeballY, eyeballR, GC9A01A_YELLOW);
         tft->fillCircle(center + pupilO, pupilY, pupilR, GC9A01A_BLACK);
         yield();
-        delay(1000);
+
+        return 1000;
     }
 };

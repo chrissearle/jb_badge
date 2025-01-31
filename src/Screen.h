@@ -16,5 +16,5 @@ protected:
 public:
     Screen(Adafruit_SPITFT *tft) : tft(tft) {};
     virtual ~Screen() {};
-    virtual void draw() = 0;
+    virtual uint32_t draw() = 0;
 };

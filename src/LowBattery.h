@@ -10,11 +10,11 @@ class LowBattery : public Screen
 {
 public:
     LowBattery(Adafruit_SPITFT *tft) : Screen(tft) {}
-    void draw()
+    uint32_t draw()
     {
         // Black
         tft->fillScreen(GC9A01A_RED);
         yield();
-        delay(1000);
+        return 1000;
     }
 };
