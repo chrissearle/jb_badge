@@ -55,16 +55,20 @@ Note that when converting it must write the bytes in little-endian.
 
 ### Build converter
 
+Expects Graal JDK 22.
+
 ```shell
 cd converter
-./gradlew clean build
+./gradlew clean nativeCompile
 ```
+
+This builds a native executable in converter/build/native/nativeCompile/jb_badge_converter
 
 ### Convert images
 
 ```shell
 cd images
 for F in *png; do
-    java -jar ../converter/build/libs/converter.jar $F ${F%%.png}.dat
+    ./converter/build/native/nativeCompile/jb_badge_converter $F ${F%%.png}.dat
 done
 ```
