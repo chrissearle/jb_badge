@@ -4,7 +4,7 @@ detekt = "1.23.8"
 gradle_versions_filter = "0.1.16"
 graal = "0.11.3"
 guava = "33.5.0-jre"
-kotlin = "2.2.21"
+kotlin = "2.3.0"
 kotlinter = "5.3.0"
 
 [libraries]
