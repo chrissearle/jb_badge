@@ -5,7 +5,7 @@ gradle_versions_filter = "0.1.16"
 graal = "0.11.4"
 guava = "33.5.0-jre"
 kotlin = "2.3.0"
-kotlinter = "5.3.0"
+kotlinter = "5.4.0"
 
 [libraries]
 guava = { group = "com.google.guava", name = "guava", version.ref = "guava" }
