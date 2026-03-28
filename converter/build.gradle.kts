@@ -12,7 +12,7 @@ version = "1.0-SNAPSHOT"
 description = "converter"
 
 kotlin {
-    jvmToolchain(22)
+    jvmToolchain(25)
 
     compilerOptions {
         freeCompilerArgs = listOf("-Xconsistent-data-class-copy-visibility")
@@ -34,7 +34,7 @@ graalvmNative {
             mainClass.set("net.chrissearle.converter.ConvertKt")
             javaLauncher.set(
                 javaToolchains.launcherFor {
-                    languageVersion.set(JavaLanguageVersion.of(22))
+                    languageVersion.set(JavaLanguageVersion.of(25))
                     vendor.set(JvmVendorSpec.GRAAL_VM)
                 },
             )
