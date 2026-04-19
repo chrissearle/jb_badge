@@ -1,5 +1,5 @@
 [versions]
-dependency_analysis = "3.7.0"
+dependency_analysis = "3.8.0"
 detekt = "1.23.8"
 gradle_versions_filter = "0.1.16"
 graal = "1.0.0"
