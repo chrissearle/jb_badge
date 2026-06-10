@@ -2,7 +2,7 @@
 dependency_analysis = "3.14.1"
 detekt = "1.23.8"
 gradle_versions_filter = "0.1.16"
-graal = "1.1.1"
+graal = "1.1.2"
 guava = "33.6.0-jre"
 kotlin = "2.4.0"
 kotlinter = "5.5.0"
