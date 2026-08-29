@@ -1,6 +1,6 @@
 [versions]
 dependency_analysis = "3.19.1"
-detekt = "1.23.8"
+detekt = "2.0.0-alpha.6"
 gradle_versions_filter = "0.1.16"
 graal = "1.1.11"
 guava = "33.7.1-jre"
@@ -12,7 +12,7 @@ guava = { group = "com.google.guava", name = "guava", version.ref = "guava" }
 
 [plugins]
 dependency-analysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependency_analysis" }
-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+detekt = { id = "dev.detekt", version.ref = "detekt" }
 graal = { id = "org.graalvm.buildtools.native", version.ref = "graal" }
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlinter = { id = "org.jmailen.kotlinter", version.ref = "kotlinter" }

@@ -25,6 +25,12 @@ repositories {
 
 dependencies {
     implementation(libs.guava)
+
+    testImplementation(kotlin("test"))
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
 graalvmNative {
