@@ -55,12 +55,16 @@ Note that when converting it must write the bytes in little-endian.
 
 ### Build converter
 
-Expects Graal JDK 22.
+Expects Graal JDK 25 (see `converter/mise.toml`).
 
 ```shell
 cd converter
 ./gradlew clean nativeCompile
 ```
+
+The converter decodes PNGs itself rather than using `javax.imageio`, which cannot run in a
+native image (it initialises AWT, whose native libraries a native image does not bundle).
+`./gradlew test` checks the output stays byte-identical to the original ImageIO version.
 
 This builds a native executable in converter/build/native/nativeCompile/jb_badge_converter
 
@@ -69,6 +73,6 @@ This builds a native executable in converter/build/native/nativeCompile/jb_badge
 ```shell
 cd images
 for F in *png; do
-    ./converter/build/native/nativeCompile/jb_badge_converter $F ${F%%.png}.dat
+    ../converter/build/native/nativeCompile/jb_badge_converter $F ${F%%.png}.dat
 done
 ```
