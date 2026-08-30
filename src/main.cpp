@@ -85,36 +85,28 @@ void nextScreen()
   }
 
   static uint32_t lastScreen = 0;
-  uint32_t nextScreen = lastScreen;
+  uint32_t pick = lastScreen;
 
   do
   {
-    nextScreen = random(screenCount);
-  } while (nextScreen == lastScreen);
+    pick = random(screenCount + 1);
+  } while (pick == lastScreen);
 
-  lastScreen = nextScreen;
+  lastScreen = pick;
 
   if (currentScreen != nullptr)
   {
     delete currentScreen;
   }
 
-  switch (nextScreen)
+  if (pick == 0)
   {
-  case 0:
     currentScreen = new Avatar(tft);
-    break;
-  default:
-    if (nextScreen - 1 < screenCount)
-    {
-      screenInfo currentScreenInfo = screens[nextScreen - 1];
-      currentScreen = new ImageScreen(tft, currentScreenInfo.filename, currentScreenInfo.background, currentScreenInfo.imageWidth, currentScreenInfo.imageHeight);
-    }
-    else
-    {
-      currentScreen = new Avatar(tft);
-    }
-    break;
+  }
+  else
+  {
+    const screenInfo &info = screens[pick - 1];
+    currentScreen = new ImageScreen(tft, info.filename, info.background, info.imageWidth, info.imageHeight);
   }
 }
 
