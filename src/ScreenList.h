@@ -11,7 +11,7 @@ struct screenInfo
     uint16_t imageHeight;
 };
 
-screenInfo screens[] = {
+constexpr screenInfo screens[] = {
     {"2024_circle.dat", GC9A01A_WHITE, 200, 200},
     {"bart_duke.dat", GC9A01A_WHITE, 240, 240},
     {"bendy.dat", GC9A01A_WHITE, 240, 240},
@@ -47,4 +47,4 @@ screenInfo screens[] = {
     {"wheely.dat", GC9A01A_WHITE, 240, 240},
 };
 
-size_t screenCount = (sizeof(screens) / sizeof(screens[0])) + 1;
+constexpr size_t screenCount = (sizeof(screens) / sizeof(screens[0]));
