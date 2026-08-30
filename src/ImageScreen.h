@@ -19,18 +19,6 @@ private:
     const uint16_t imageWidth;
     const uint16_t imageHeight;
 
-    void write()
-    {
-        if (SD.exists(filename))
-        {
-            SD.remove(filename);
-        }
-
-        File file = SD.open(filename, FILE_WRITE);
-        file.write(pixels, imageWidth * imageHeight * byteWidth);
-        file.close();
-    }
-
     void read()
     {
         pixels = (uint16_t *)malloc(imageWidth * imageHeight * byteWidth);
@@ -64,7 +52,7 @@ public:
         free(pixels);
     }
 
-    uint32_t draw()
+    uint32_t draw() override
     {
         tft->fillScreen(background);
 

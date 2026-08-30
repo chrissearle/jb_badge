@@ -10,7 +10,7 @@ class LowBattery : public Screen
 {
 public:
     LowBattery(Adafruit_SPITFT *tft) : Screen(tft) {}
-    uint32_t draw()
+    uint32_t draw() override
     {
         // Black
         tft->fillScreen(GC9A01A_RED);

@@ -10,7 +10,7 @@ class Avatar : public Screen
 {
 public:
     Avatar(Adafruit_SPITFT *tft) : Screen(tft) {}
-    uint32_t draw()
+    uint32_t draw() override
     {
         int16_t eyeballY = 70;
         int16_t pupilY = 83;
