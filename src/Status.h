@@ -5,8 +5,9 @@
 class Status
 {
 private:
-    const bool inUse = false;
-    bool active = true;
+    static constexpr bool inUse = false; // Currently disabled - we pull the battery when needed
+
+    bool active = false;
     Bounce bounce;
     int blPin;
 
@@ -14,24 +15,17 @@ private:
     // and #define GC9A01A_DISPON 0x29    ///< Display ON
     void setBacklight()
     {
-        if (active)
-        {
-            digitalWrite(blPin, HIGH);
-        }
-        else
-        {
-            digitalWrite(blPin, LOW);
-        }
+        digitalWrite(blPin, active ? HIGH : LOW);
     }
 
 public:
-    Status(int pin, int backlightPin)
+    Status(int pin, int backlightPin) : blPin(backlightPin)
     {
-        bounce = Bounce();
-        bounce.attach(pin, INPUT_PULLUP);
-        bounce.interval(5);
-
-        blPin = backlightPin;
+        if (inUse)
+        {
+            bounce.attach(pin, INPUT_PULLUP);
+            bounce.interval(5);
+        }
     }
 
     void process()
@@ -45,10 +39,9 @@ public:
 
         if (bounce.changed())
         {
-            int deboucedInput = bounce.read();
-
-            // TODO - check if we pull low or high - think this is release of button which is what is wanted.
-            if (deboucedInput == HIGH)
+            // TODO - check if we pull low or high - think this is release of button
+            // which is what is wanted.
+            if (bounce.read() == HIGH)
             {
                 active = !active;
                 setBacklight();
@@ -56,15 +49,8 @@ public:
         }
     }
 
-    bool isActive()
+    bool isActive() const
     {
-        if (inUse)
-        {
-            return active;
-        }
-        else
-        {
-            return true;
-        }
+        return !inUse || active;
     }
 };

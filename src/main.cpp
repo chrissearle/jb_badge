@@ -21,8 +21,6 @@
 #define TFT_BL 7
 
 #define VOLT_PIN 18
-
-// TODO - set button pin
 #define BOUNCE_PIN 2
 
 Adafruit_GC9A01A *tft;
