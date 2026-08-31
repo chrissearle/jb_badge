@@ -122,7 +122,12 @@ void loop(void)
     if (currentMillis - previousMillis >= interval)
     {
       nextScreen();
-      interval = currentScreen->draw();
+
+      if (currentScreen != nullptr)
+      {
+        interval = currentScreen->draw();
+      }
+
       previousMillis = millis();
     }
   }
