@@ -10,10 +10,13 @@
 class ImageScreen : public Screen
 {
 private:
-    const uint16_t maxDim = 240;
-    const uint16_t byteWidth = 2;
+    static constexpr uint16_t maxDim = 240;
+    static constexpr uint16_t byteWidth = 2;
 
-    uint16_t *pixels;
+    inline static DMAMEM uint16_t buffer[maxDim * maxDim];
+
+    bool valid = false;
+
     const char *filename;
     const uint16_t background;
     const uint16_t imageWidth;
@@ -21,35 +24,43 @@ private:
 
     void read()
     {
-        pixels = (uint16_t *)malloc(imageWidth * imageHeight * byteWidth);
+        if (imageWidth > maxDim || imageHeight > maxDim)
+        {
+            Serial.printf("image too big: %s (%ux%u)\n", filename, imageWidth, imageHeight);
+            return;
+        }
+
         File file = SD.open(filename, FILE_READ);
-        file.read(pixels, imageWidth * imageHeight * byteWidth);
+
+        if (!file)
+        {
+            Serial.printf("image missing: %s\n", filename);
+            return;
+        }
+
+        const size_t expected = static_cast<size_t>(imageWidth) * imageHeight * byteWidth;
+        const size_t got = file.read(buffer, expected);
+
         file.close();
+
+        if (got != expected)
+        {
+            Serial.printf("image short: %s (%u of %u bytes)\n", filename, got, expected);
+            return;
+        }
+
+        valid = true;
     }
 
 public:
     ImageScreen(Adafruit_SPITFT *tft, const char *filename, uint16_t background,
-                uint16_t imageWidth, uint16_t imageHeight) : Screen(tft),
-                                                             filename(filename),
-                                                             background(background),
-                                                             imageWidth(imageWidth),
-                                                             imageHeight(imageHeight)
+                uint16_t imageWidth = 170, uint16_t imageHeight = 170) : Screen(tft),
+                                                                         filename(filename),
+                                                                         background(background),
+                                                                         imageWidth(imageWidth),
+                                                                         imageHeight(imageHeight)
     {
         read();
-    }
-
-    ImageScreen(Adafruit_SPITFT *tft, const char *filename, uint16_t background) : Screen(tft),
-                                                                                   filename(filename),
-                                                                                   background(background),
-                                                                                   imageWidth(170),
-                                                                                   imageHeight(170)
-    {
-        read();
-    }
-
-    ~ImageScreen()
-    {
-        free(pixels);
     }
 
     uint32_t draw() override
@@ -58,9 +69,12 @@ public:
 
         yield();
 
-        tft->drawRGBBitmap((maxDim - imageWidth) / 2, (maxDim - imageHeight) / 2, pixels, imageWidth, imageHeight);
+        if (valid)
+        {
+            tft->drawRGBBitmap((maxDim - imageWidth) / 2, (maxDim - imageHeight) / 2, buffer, imageWidth, imageHeight);
 
-        yield();
+            yield();
+        }
 
         return 2000;
     }
