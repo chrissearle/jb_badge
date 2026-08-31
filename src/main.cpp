@@ -114,7 +114,10 @@ void loop(void)
 {
   status->process();
 
-  if (status->isActive())
+  static bool wasActive = true;
+  const bool active = status->isActive();
+
+  if (active)
   {
     voltage->process();
     unsigned long currentMillis = millis();
@@ -131,8 +134,10 @@ void loop(void)
       previousMillis = millis();
     }
   }
-  else
+  else if (wasActive)
   {
     tft->fillScreen(GC9A01A_BLACK);
   }
+
+  wasActive = active;
 }
