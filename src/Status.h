@@ -5,7 +5,7 @@
 class Status
 {
 private:
-    static constexpr bool inUse = false; // Currently disabled - we pull the battery when needed
+    static constexpr bool btnInUse = false; // Currently disabled - we pull the battery when needed
 
     bool active = true;
 
@@ -22,7 +22,7 @@ private:
 public:
     Status(int pin, int backlightPin) : blPin(backlightPin)
     {
-        if (inUse)
+        if (btnInUse)
         {
             bounce.attach(pin, INPUT_PULLUP);
             bounce.interval(5);
@@ -31,7 +31,7 @@ public:
 
     void process()
     {
-        if (!inUse)
+        if (!btnInUse)
         {
             return;
         }
@@ -52,6 +52,6 @@ public:
 
     bool isActive() const
     {
-        return !inUse || active;
+        return !btnInUse || active;
     }
 };
