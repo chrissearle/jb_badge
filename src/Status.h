@@ -7,7 +7,8 @@ class Status
 private:
     static constexpr bool inUse = false; // Currently disabled - we pull the battery when needed
 
-    bool active = false;
+    bool active = true;
+
     Bounce bounce;
     int blPin;
 
