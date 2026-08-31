@@ -12,6 +12,8 @@ public:
     Avatar(Adafruit_SPITFT *tft) : Screen(tft) {}
     uint32_t draw() override
     {
+        Serial.printf("load avatar\n");
+
         int16_t eyeballY = 70;
         int16_t pupilY = 83;
 

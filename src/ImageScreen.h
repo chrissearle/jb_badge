@@ -24,6 +24,8 @@ private:
 
     void read()
     {
+        Serial.printf("image to load: %s\n", filename);
+
         if (imageWidth > maxDim || imageHeight > maxDim)
         {
             Serial.printf("image too big: %s (%ux%u)\n", filename, imageWidth, imageHeight);
@@ -50,6 +52,8 @@ private:
         }
 
         valid = true;
+
+        Serial.printf("image loaded successfully: %s\n", filename);
     }
 
 public:

@@ -14,6 +14,7 @@
 #include "Status.h"
 #include "Voltage.h"
 #include "ScreenList.h"
+#include "ErrorScreen.h"
 
 #define TFT_DC 9
 #define TFT_CS 10
@@ -47,10 +48,9 @@ void initializeSD()
 {
   if (!SD.begin(BUILTIN_SDCARD))
   {
-    tft->fillScreen(GC9A01A_YELLOW);
+    Serial.printf("SD card initialization failed\n");
 
-    while (true)
-      ;
+    ErrorScreen(tft, "SD").halt();
   }
 }
 
